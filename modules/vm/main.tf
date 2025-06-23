@@ -21,7 +21,21 @@ resource "google_compute_instance" "default" {
   }
 
   metadata_startup_script = <<-EOT
-    #!/bin/bash
-    echo "Hello from Terraform" > /var/tmp/hello.txt
-  EOT
+  #!/bin/bash
+  
+  # Garante que a lista de pacotes esteja atualizada
+  apt-get update -y
+
+  # Instala o Nginx. O "-y" confirma automaticamente a instalação.
+  apt-get install -y nginx
+
+  # Inicia o serviço do Nginx
+  systemctl start nginx
+
+  # Habilita o Nginx para iniciar automaticamente em futuros reboots
+  systemctl enable nginx
+
+  # Pequena mensagem para confirmar que o script rodou
+  echo "<h1>Instalacao do Nginx concluida com Terraform!</h1>" > /var/www/html/index.nginx-debian.html
+EOT
 }
