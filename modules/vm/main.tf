@@ -16,6 +16,10 @@ resource "google_compute_instance" "default" {
     access_config {}
   }
 
+  metadata = {
+    ssh-keys = "alissonmuniz17:${var.ssh_pub_key}"
+  }
+
   metadata_startup_script = <<-EOT
     #!/bin/bash
     echo "Hello from Terraform" > /var/tmp/hello.txt

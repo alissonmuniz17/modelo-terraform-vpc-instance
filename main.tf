@@ -10,4 +10,5 @@ module "vm" {
   instance_name = "site-joana"
   zone          = "us-east4-a"
   subnetwork       = module.network.subnetwork_name
+  ssh_pub_key   = file("/home/alisson/.ssh/id_ed25519.pub")
 }
