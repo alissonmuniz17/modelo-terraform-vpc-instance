@@ -11,6 +11,11 @@ resource "google_compute_instance" "default" {
     }
   }
 
+  service_account {
+    email  = var.service_account_email
+    scopes = ["cloud-platform"] // Permite que a VM acesse todas as APIs do GCP que a conta de serviço tiver permissão
+  }
+
   network_interface {
     subnetwork = var.subnetwork
     access_config {}
@@ -34,6 +39,9 @@ resource "google_compute_instance" "default" {
 
   # Habilita o Nginx para iniciar automaticamente em futuros reboots
   systemctl enable nginx
+
+  # Instala o Git
+  apt-get install -y git
 
   # Pequena mensagem para confirmar que o script rodou
   echo "<h1>Instalacao do Nginx concluida com Terraform!</h1>" > /var/www/html/index.nginx-debian.html

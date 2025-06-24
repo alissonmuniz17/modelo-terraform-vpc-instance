@@ -14,3 +14,8 @@ variable "credentials_file" {
   sensitive = true                                                       
     
 }
+
+variable "zone" {
+  type = string
+  description = "zona padrão da rede"
+}

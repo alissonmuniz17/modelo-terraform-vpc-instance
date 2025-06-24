@@ -15,3 +15,8 @@ variable "ssh_pub_key" {
   description = "chave publica ssh para conectar na vm"
   sensitive = true
 }
+
+variable "service_account_email" {
+  type        = string
+  description = "O e-mail da conta de serviço a ser anexada à VM."
+}
